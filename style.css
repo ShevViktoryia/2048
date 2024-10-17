@@ -4,6 +4,13 @@
   box-sizing: border-box;
 }
 
+:root {
+  --cell-size: 20vmin;
+  --gap: 0.3rem;
+  --coord-x: 1;
+  --coord-y: 1;
+}
+
 body {
   background-color: #222222;
   display: flex;
@@ -15,13 +22,39 @@ body {
 
 .game-board {
   display: grid;
-  grid-template-columns: repeat(4, 20vmin);
-  grid-template-rows: repeat(4, 20vmin);
-  gap: 0.3rem;
+  grid-template-columns: repeat(4, var(--cell-size));
+  grid-template-rows: repeat(4, var(--cell-size));
+  gap: var(--gap);
   border-radius: 1.3rem;
+  position: relative;
 }
 
 .game-board__cell {
   background-color: #444444;
   border-radius: 1.3rem;
+}
+
+.game-board__point {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--cell-size);
+  height: var(--cell-size);
+  border-radius: 1.3rem;
+  font-family: Georgia, "Times New Roman", Times, serif;
+  font-size: 7vmin;
+  font-weight: 600;
+  background-color: #fff;
+  top: calc(var(--coord-y) * (var(--cell-size) + var(--gap)));
+  left: calc(var(--coord-x) * (var(--cell-size) + var(--gap)));
+  transition: 0.3s;
+  animation: show 0.3s;
+}
+
+@keyframes show {
+  0% {
+    opacity: 0.5;
+    transform: scale(0);
+  }
 }
